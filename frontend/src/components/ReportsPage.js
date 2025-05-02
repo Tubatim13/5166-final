@@ -47,10 +47,10 @@ export default function ReportsPage() {
           />
 
           <p>
-            This bar chart illustrates the capacity metrics for solar, wind, and hydro energy
-            sources based on the seed data provided. The data is retrieved from our MySQL
-            database via the `/api/chart2` endpoint and reflects current infrastructure
-            capacities. Source: internal T63 database.
+            This timeline chart reveals a remarkably steady pace of clean‑energy innovation,
+      with exactly one new advancement recorded in each month from January through June.
+      Such consistency suggests a sustained, month‑by‑month commitment to R&D across all
+      clean‑energy categories rather than sporadic bursts. (Data originating from the linked wiki and seeded into the t63 database.)
           </p>
         </>
       )}

@@ -47,10 +47,11 @@ export default function SummaryPage() {
           />
 
           <p>
-            This bar chart visualizes the number of clean‑energy innovations introduced in the
-            last six months, broken down by innovation type. The underlying data is fetched
-            asynchronously from our MySQL database via the `/api/chart1` endpoint and reflects
-            seed values representing capacity metrics. Source: internal T63 database.
+            This bar chart shows that solar‑related innovations dominated over the past six months,
+      with four major breakthroughs, while wind energy contributed two key developments and
+      urban‑cooling strategies added one. The prevalence of solar advances highlights the
+      intense research focus on photovoltaic efficiency and maintenance solutions during this
+      period. (Data sourced from information on the linked dashboard Wiki and the internal T63 database.)
           </p>
         </>
       )}
