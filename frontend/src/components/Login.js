@@ -14,7 +14,7 @@ export default function Login() {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const { data } = await axios.post('http://localhost/api/login', user);
+      const { data } = await axios.post('/api/login', user);
       localStorage.setItem('token', data.token);
       nav('/dashboard');
     } catch (e) {

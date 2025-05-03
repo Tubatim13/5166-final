@@ -6,7 +6,7 @@ export default function SummaryPage() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost/api/chart1', {
+    axios.get('/api/chart1', {
       headers:{ Authorization:`Bearer ${localStorage.getItem('token')}` }
     })
     .then(res => setData(res.data.data))
