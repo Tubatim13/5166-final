@@ -1,37 +1,39 @@
 -- backend/db/init_db.sql
-
--- 1) Create & select our project database
+-- Create the database and switch to it
 CREATE DATABASE IF NOT EXISTS t63;
 USE t63;
 
--- 2) Create chart1 with a UNIQUE constraint on label to allow upserts
+-- Create chart1 table with unique constraint on label
 CREATE TABLE IF NOT EXISTS chart1 (
   id    INT AUTO_INCREMENT PRIMARY KEY,
   label VARCHAR(255) NOT NULL,
-  value INT NOT NULL,
+  value INT          NOT NULL,
   UNIQUE KEY unique_label (label)
 );
 
--- 3) Create chart2 with a UNIQUE constraint on category for upserts
+-- Create chart2 table with unique constraint on category
 CREATE TABLE IF NOT EXISTS chart2 (
   id       INT AUTO_INCREMENT PRIMARY KEY,
-  category VARCHAR(255) NOT NULL,
-  metric   DECIMAL(10,2) NOT NULL,
+  category VARCHAR(255)    NOT NULL,
+  metric   DECIMAL(10,2)   NOT NULL,
   UNIQUE KEY unique_category (category)
 );
 
--- 4) Upsert seed data into chart1
+-- Insert or update seed data for chart1
 INSERT INTO chart1 (label, value) VALUES
-  ('Innovation A', 20),
-  ('Innovation B', 35),
-  ('Innovation C', 45)
+  ('Wind', 2),
+  ('Solar', 4),
+  ('Urban Cooling', 1)
 ON DUPLICATE KEY UPDATE
   value = VALUES(value);
 
--- 5) Upsert seed data into chart2
+-- Insert or update seed data for chart2
 INSERT INTO chart2 (category, metric) VALUES
-  ('Solar Capacity', 150.00),
-  ('Wind Capacity', 120.00),
-  ('Hydro Capacity', 90.50)
+  ('January',  1),
+  ('February', 1),
+  ('March',    1),
+  ('April',    1),
+  ('May',      1),
+  ('June',     1)
 ON DUPLICATE KEY UPDATE
   metric = VALUES(metric);

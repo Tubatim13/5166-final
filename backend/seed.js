@@ -1,62 +1,65 @@
 // backend/seed.js
-// This script connects to the MySQL database, ensures the required tables exist,
-// clears any existing records in those tables, and then inserts/upserts the seed data.
-// Run with: `node seed.js` (or via npm script)
+// This script connects to MySQL, creates the required tables if they don't exist,
+// clears existing data, and inserts seed records for chart1 and chart2.
 
 const mysql = require('mysql2/promise');
 
 (async () => {
-  // Configure connection using env vars or defaults
+  // Configure the connection using environment variables or defaults
   const connection = await mysql.createConnection({
-    host:     process.env.DB_HOST || 'localhost',
-    user:     process.env.DB_USER || 'root',
-    password: process.env.DB_PASS || 'yyb3317',
-    database: process.env.DB_NAME || 't63'
+    host:     process.env.DB_HOST     || '127.0.0.1',
+    user:     process.env.DB_USER     || 'root',
+    password: process.env.DB_PASS     || '',
+    database: process.env.DB_NAME     || 't63'
   });
-  
 
-  // Create chart1 table with UNIQUE constraint on label
+  // Create chart1 table (label, value)
   await connection.execute(`
     CREATE TABLE IF NOT EXISTS chart1 (
-      id INT AUTO_INCREMENT PRIMARY KEY,
-      label VARCHAR(255) NOT NULL,
-      value INT NOT NULL,
-      UNIQUE KEY unique_label (label)
+      id    INT AUTO_INCREMENT PRIMARY KEY,
+      label VARCHAR(255) NOT NULL UNIQUE,
+      value INT NOT NULL
     );
   `);
 
-  // Create chart2 table with UNIQUE constraint on category
+  // Create chart2 table (category, metric)
   await connection.execute(`
     CREATE TABLE IF NOT EXISTS chart2 (
-      id INT AUTO_INCREMENT PRIMARY KEY,
-      category VARCHAR(255) NOT NULL,
-      metric DECIMAL(10,2) NOT NULL,
-      UNIQUE KEY unique_category (category)
+      id       INT AUTO_INCREMENT PRIMARY KEY,
+      category VARCHAR(255) NOT NULL UNIQUE,
+      metric   DECIMAL(10,2) NOT NULL
     );
   `);
 
-  // Upsert seed data into chart1
+  // Clear existing data
+  await connection.execute('TRUNCATE TABLE chart1');
+  await connection.execute('TRUNCATE TABLE chart2');
+
+  // Seed data for chart1: Wind, Solar, Urban Cooling
+  const chart1Data = [
+    ['Wind', 2],
+    ['Solar', 4],
+    ['Urban Cooling', 1]
+  ];
   await connection.query(
-    `INSERT INTO chart1 (label, value) VALUES ?
-     ON DUPLICATE KEY UPDATE value = VALUES(value);`,
-    [[
-      ['Innovation A', 20],
-      ['Innovation B', 35],
-      ['Innovation C', 45]
-    ]]
+    'INSERT INTO chart1 (label, value) VALUES ?',
+    [chart1Data]
   );
 
-  // Upsert seed data into chart2
+  // Seed data for chart2: innovations by month
+  const chart2Data = [
+    ['January',  1],
+    ['February', 1],
+    ['March',    1],
+    ['April',    1],
+    ['May',      1],
+    ['June',     1]
+  ];
   await connection.query(
-    `INSERT INTO chart2 (category, metric) VALUES ?
-     ON DUPLICATE KEY UPDATE metric = VALUES(metric);`,
-    [[
-      ['Solar Capacity', 150.00],
-      ['Wind Capacity', 120.00],
-      ['Hydro Capacity', 90.50]
-    ]]
+    'INSERT INTO chart2 (category, metric) VALUES ?',
+    [chart2Data]
   );
 
-  console.log('✅ Database seeded successfully.');
+  console.log('Seeding complete');
   await connection.end();
 })();
