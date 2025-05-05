@@ -36,10 +36,12 @@ const mysql = require('mysql2/promise');
   await connection.execute('TRUNCATE TABLE chart2');
 
   // Seed data for chart1: Wind, Solar, Urban Cooling
-  const chart1Data = [
-    ['Wind', 2],
-    ['Solar', 4],
-    ['Urban Cooling', 1]
+ const chart1Data = [
+    ['Solar PV (GW)',452],
+    ['Wind (GW)',113],
+    ['Hydropower (GW)',15],
+    ['Bioenergy (GW)',4.6],
+    ['Geothermal (GW)',0.4]
   ];
   await connection.query(
     'INSERT INTO chart1 (label, value) VALUES ?',
@@ -48,13 +50,14 @@ const mysql = require('mysql2/promise');
 
   // Seed data for chart2: innovations by month
   const chart2Data = [
-    ['January',  1],
-    ['February', 1],
-    ['March',    1],
-    ['April',    1],
-    ['May',      1],
-    ['June',     1]
-  ];
+    ['Asia ( GW)',421.5],
+    ['Europe ( GW)',70.1],
+    ['North America ( GW)',45.9],
+    ['Latin America ( GW)',22.5],
+    ['Oceania ( GW)', 8.7],
+    ['Africa ( GW)',4.2],
+    ['Middle East ( GW)',3.3]
+  ]
   await connection.query(
     'INSERT INTO chart2 (category, metric) VALUES ?',
     [chart2Data]

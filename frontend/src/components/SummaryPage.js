@@ -47,11 +47,7 @@ export default function SummaryPage() {
           />
 
           <p>
-            This bar chart shows that solar‑related innovations dominated over the past six months,
-      with four major breakthroughs, while wind energy contributed two key developments and
-      urban‑cooling strategies added one. The prevalence of solar advances highlights the
-      intense research focus on photovoltaic efficiency and maintenance solutions during this
-      period. (Data sourced from information on the linked dashboard Wiki and the internal T63 database.)
+            In 2024, Solar PV dominated new renewable capacity additions with 452 GW, amounting to 77.3% of the global total, while wind added 113 GW, hydropower 15 GW, bioenergy 4.6 GW, and geothermal 0.4 GW. This chart underscores solar’s accelerating cost‑driven deployment and the complementary roles of wind and conventional renewables. (Data sourced from information on the linked dashboard and the internal T63 database.)
           </p>
         </>
       )}

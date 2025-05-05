@@ -1,7 +1,7 @@
 // src/components/ReportsPage.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import ChartComponent from './ChartComponent';
+import PieChartComponent from './PieChartComponent';
 
 export default function ReportsPage() {
   const [data, setData] = useState([]);
@@ -39,18 +39,10 @@ export default function ReportsPage() {
 
       {!loading && !error && (
         <>
-          <ChartComponent
-            data={data}
-            labelKey="label"
-            valueKey="value"
-            ariaLabel="Bar chart of capacity metrics for clean energy sources"
-          />
+          <PieChartComponent  data={data} labelKey="label" valueKey="value" ariaLabel="Report data pie chart" />
 
           <p>
-            This timeline chart reveals a remarkably steady pace of clean‑energy innovation,
-      with exactly one new advancement recorded in each month from January through June.
-      Such consistency suggests a sustained, month‑by‑month commitment to R&D across all
-      clean‑energy categories rather than sporadic bursts. (Data originating from the linked wiki and seeded into the t63 database.)
+            Regionally, Asia led the 2024 surge by contributing 421.5 GW (72% of the global increase), followed by Europe (70.1 GW), North America (45.9 GW), Latin America (22.5 GW), Oceania (8.7 GW), Africa (4.2 GW), and the Middle East (3.3 GW). This distribution highlights Asia’s pivotal role while showing broad‐based global growth. (Data originating from the linked source and seeded into the t63 database.)
           </p>
         </>
       )}

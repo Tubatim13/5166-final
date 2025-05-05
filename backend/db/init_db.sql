@@ -21,19 +21,22 @@ CREATE TABLE IF NOT EXISTS chart2 (
 
 -- Insert or update seed data for chart1
 INSERT INTO chart1 (label, value) VALUES
-  ('Wind', 2),
-  ('Solar', 4),
-  ('Urban Cooling', 1)
+  ('Solar PV ( GW)',452),
+  ('Wind ( GW)',113),
+  ('Hydropower ( GW)',15),
+  ('Bioenergy ( GW)',4.6),
+  ('Geothermal ( GW)',0.4)
 ON DUPLICATE KEY UPDATE
   value = VALUES(value);
 
 -- Insert or update seed data for chart2
 INSERT INTO chart2 (category, metric) VALUES
-  ('January',  1),
-  ('February', 1),
-  ('March',    1),
-  ('April',    1),
-  ('May',      1),
-  ('June',     1)
+  ('Asia ( GW)',421.5),
+  ('Europe ( GW)',70.1),
+  ('North America ( GW)',45.9),
+  ('Latin America ( GW)',22.5),
+  ('Oceania ( GW)',value": 8.7),
+  ('Africa ( GW)',4.2),
+  ('Middle East ( GW)',3.3)
 ON DUPLICATE KEY UPDATE
   metric = VALUES(metric);
